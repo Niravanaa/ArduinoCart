@@ -6,7 +6,6 @@ This repository contains the code for an autonomous line following robot. The ro
 * [Usage](#usage)
 * [Code Description](#code-description)
 * [Contributing](#contributing)
-* [License](#license)
 
 ## Installation
 To use this code, you need the following hardware components:
@@ -49,6 +48,3 @@ The code is written in C++ using the Arduino IDE. The main code is contained in 
 
 ## Contributing
 Contributions are welcome! If you find a bug or have an enhancement in mind, please open an issue or submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
