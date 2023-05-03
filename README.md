@@ -1,5 +1,5 @@
 # Autonomous Arduino Cart
-This repository contains the code for an autonomous line following robot. The robot is equipped with a color sensor to detect the color of the tape, an ultrasonic sensor to detect walls and obstacles, and a servo motor to control the movement of the robot.
+This repository contains the code for an autonomous obstacle-course robot. The robot is equipped with a color sensor to detect the color of the tape, an ultrasonic sensor to detect walls and obstacles, and a servo motor to control the movement of the robot.
 
 ## Table of Contents
 * [Installation](#installation)
