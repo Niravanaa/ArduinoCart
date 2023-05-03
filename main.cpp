@@ -99,78 +99,78 @@ uint8_t waitIR = 0, noWallCount = 0;
 // defining a namespace called Movement to group different movement functions
 namespace Movement {
 	
-	// function to stop the cart movement
+    // function to stop the cart movement
     void stopMoving(void) {
         leftServo.write(90);
         rightServo.write(90);
     }
 	
-	// defining a namespace inside Movement namespace for RemoteControl mode
+    // defining a namespace inside Movement namespace for RemoteControl mode
     namespace RemoteControl {
 	
-		// function to turn cart left
+	// function to turn cart left
         void turnLeft(void) {
             leftServo.write(0);
             rightServo.write(0);
         }
 
-		// function to turn cart right
+	// function to turn cart right
         void turnRight(void) {
             leftServo.write(180);
             rightServo.write(180);
         }
 
-		// function to move cart forward
+	// function to move cart forward
         void moveForward(void) {
             leftServo.write(180);
             rightServo.write(0);
         }
 
-		// function to move cart backward
+	// function to move cart backward
         void moveBackward(void) {
             leftServo.write(0);
             rightServo.write(180);
         }
     }
 	
-	// defining a namespace inside Movement namespace for WallFollow mode
+    // defining a namespace inside Movement namespace for WallFollow mode
     namespace WallFollow {
 
-		// function to turn cart left when wall is detected
+	// function to turn cart left when wall is detected
         void turnLeft(void) {
             leftServo.write(90 + WALL_TURN_DEG);
             rightServo.write(0);
         }
 
-		// function to turn cart right when wall is detected
+	// function to turn cart right when wall is detected
         void turnRight(void) {
             leftServo.write(180);
             rightServo.write(90 - WALL_TURN_DEG);
         }
 
-		// function to move cart straight when wall is detected
+	// function to move cart straight when wall is detected
         void moveStraight(void) {
             leftServo.write(180);
             rightServo.write(0);
         }
     }
 
-	// defining a namespace inside Movement namespace for TapeFollow mode
+    // defining a namespace inside Movement namespace for TapeFollow mode
     namespace TapeFollow {
 
-		// function to turn cart left when tape is detected
+	// function to turn cart left when tape is detected
         void turnLeft(void) {
             leftServo.write(90 - TAPE_TURN_DEG);
             rightServo.write(90 - TAPE_TURN_DEG);
         }
 
-		// function to turn cart right when tape is detected
+	// function to turn cart right when tape is detected
         void turnRight(void) {
             leftServo.write(90 + TAPE_TURN_DEG);
             rightServo.write(90 + TAPE_TURN_DEG);
         }
 
-		// function to move cart straight when tape is detected
+	// function to move cart straight when tape is detected
         void moveStraight(void) {
             leftServo.write(90 + TAPE_TURN_DEG);
             rightServo.write(90 - TAPE_TURN_DEG);
@@ -229,30 +229,23 @@ namespace Sensors {
         const float blueRatio = (float) blueFrequency / clearFrequency;
 
         // calculate differences for each tape color
-        const uint32_t midTapeDiff = abs(MID_TAPE_R - redRatio) +
-            abs(MID_TAPE_G - greenRatio) + abs(MID_TAPE_B - blueRatio);
-        const uint32_t leftTapeDiff = abs(LEFT_TAPE_R - redRatio) +
-            abs(LEFT_TAPE_G - greenRatio) + abs(LEFT_TAPE_B - blueRatio);
-        const uint32_t rightTapeDiff = abs(RIGHT_TAPE_R - redRatio) +
-            abs(RIGHT_TAPE_G - greenRatio) + abs(RIGHT_TAPE_B - blueRatio);
+        const uint32_t midTapeDiff = abs(MID_TAPE_R - redRatio) + abs(MID_TAPE_G - greenRatio) + abs(MID_TAPE_B - blueRatio);
+        const uint32_t leftTapeDiff = abs(LEFT_TAPE_R - redRatio) + abs(LEFT_TAPE_G - greenRatio) + abs(LEFT_TAPE_B - blueRatio);
+        const uint32_t rightTapeDiff = abs(RIGHT_TAPE_R - redRatio) + abs(RIGHT_TAPE_G - greenRatio) + abs(RIGHT_TAPE_B - blueRatio);
 
         // return value corresponding with minimum difference
-        return ((midTapeDiff < leftTapeDiff) ?
-            ((rightTapeDiff < midTapeDiff) ?
-                TapeColor::RightTape : TapeColor::MidTape) :
-            ((leftTapeDiff < rightTapeDiff) ?
-                TapeColor::LeftTape : TapeColor::RightTape));
+        return ((midTapeDiff < leftTapeDiff) ? ((rightTapeDiff < midTapeDiff) ? TapeColor::RightTape : TapeColor::MidTape) : ((leftTapeDiff < rightTapeDiff) ? TapeColor::LeftTape : TapeColor::RightTape));
     }
 }
 
 // The following function initializes the hardware components required for the robot's operation.
 void setup() {
 
-	// Start serial communication at 9600 baud rate
+    // Start serial communication at 9600 baud rate
     Serial.begin(9600);
 
     // Attach servos to the corresponding pins and stop moving the robot
-	leftServo.attach(LEFT_SERVO_PIN);
+    leftServo.attach(LEFT_SERVO_PIN);
     rightServo.attach(RIGHT_SERVO_PIN);
     Movement::stopMoving();
 
@@ -287,13 +280,13 @@ void loop() {
     // checks the current mode
     if (currMode == SysMode::RemoteControl) {
 
-		// check if infrared signal has been received
+	// check if infrared signal has been received
         if (IrReceiver.decode()) {
 		
-			// check if the signal is a repeat
+	    // check if the signal is a repeat
             const bool isRepeating = (IrReceiver.decodedIRData.flags == IRDATA_FLAGS_IS_REPEAT);
 			
-			// get the command from the signal
+	    // get the command from the signal
             const uint8_t command = IrReceiver.decodedIRData.command;
 
             // check if the signal is a movement command
@@ -347,12 +340,11 @@ void loop() {
 
     } else if (currMode == SysMode::WallFollow) {
 	
-		// check if infrared signal has been received
+	// check if infrared signal has been received
         if (IrReceiver.decode()) {
 		
             // check if the signal is a mode change command
-            if (IrReceiver.decodedIRData.command ==
-                static_cast < uint8_t > (RemoteButtons::Mode1)) {
+            if (IrReceiver.decodedIRData.command == static_cast < uint8_t > (RemoteButtons::Mode1)) {
                 currMode = SysMode::RemoteControl; // change to RemoteControl mode
                 Movement::stopMoving();
             }
