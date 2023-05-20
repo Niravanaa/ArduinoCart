@@ -1,6 +1,7 @@
 # Autonomous Arduino Cart
 This repository contains the code for an autonomous obstacle-course robot. The robot is equipped with a color sensor to detect the color of the tape, an ultrasonic sensor to detect walls and obstacles, and a servo motor to control the movement of the robot.
 
+This project was completed as a team, with members [Teodor Oprea](https://www.linkedin.com/in/teodor-oprea/) and [Nathan Wong](https://www.linkedin.com/in/nathan-wong-317604241/)
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
