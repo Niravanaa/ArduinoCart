@@ -3,7 +3,7 @@ This repository contains the code for an autonomous obstacle-course robot. The r
 
 This project was completed as a team, with members [Teodor Oprea](https://www.linkedin.com/in/teodor-oprea/) and [Nathan Wong](https://www.linkedin.com/in/nathan-wong-317604241/).
 
-<p align="center"><img  src="https://raw.githubusercontent.com/Niravanaa/ArduinoCart/main/ArduinoCart.jpg" width="400"></p>
+<p align="center"><img  src="https://raw.githubusercontent.com/Niravanaa/ArduinoCart/main/ArduinoCart.png" width="400"></p>
 <p align="center"><b>Image of the Cart</b></p>
 
 ## Table of Contents
